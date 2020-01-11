@@ -28,11 +28,19 @@ const diagonalNorthWest = [
   [-3, 3]
 ];
 
+const square = [
+  [0, 0],
+  [0, 1],
+  [1, 0],
+  [1, 1]
+];
+
 export type Combination = number[][];
 
 export const winningCombinations: Combination[] = [
   horizontal,
   vertical,
   diagonalNorthEast,
-  diagonalNorthWest
+  diagonalNorthWest,
+  square
 ];

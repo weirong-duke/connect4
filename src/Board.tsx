@@ -5,6 +5,7 @@ import { RootState } from "./reducers";
 import { getBoard, getCurrentPlayer, getWinner } from "./reducers/selectors";
 import { Row } from "./Row";
 import { dropCoin } from "./actions/dropCoin";
+import { Color } from "./types";
 
 interface Props {
   board: ReturnType<typeof getBoard>;
@@ -22,18 +23,31 @@ export class BoardComponent extends React.Component<Props, State> {
     }
   };
 
+  displayWinner() {
+    if (this.props.winner) {
+      return <h2>Congratulations, {this.props.winner} wins the game!</h2>;
+    }
+
+    return null;
+  }
+
+  displayRow = (colors: Color[], key: number) => {
+    return (
+      <Row dropCoin={this.dropCoin} colors={colors} key={`column-${key}`} />
+    );
+  };
+
   render() {
     const classes = cn("Game-Board");
 
-    if (this.props.winner) {
-      console.log("winner is", this.props.winner);
-    }
-
-    const columnComponents = this.props.board.map((column, index) => (
-      <Row dropCoin={this.dropCoin} colors={column} key={`column-${index}`} />
-    ));
-
-    return <div className={classes}>{columnComponents}</div>;
+    return (
+      <>
+        {this.displayWinner()}
+        <div className="Game">
+          <div className={classes}>{this.props.board.map(this.displayRow)}</div>
+        </div>
+      </>
+    );
   }
 }
 
