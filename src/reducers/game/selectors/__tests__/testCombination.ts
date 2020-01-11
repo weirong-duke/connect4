@@ -36,7 +36,12 @@ describe("testCombination selector", () => {
       [0, 2]
     ];
 
-    expect(testCombination(board, combination)).toBe("yellow");
+    expect(testCombination(board, combination)).toEqual({
+      color: "yellow",
+      column: 4,
+      row: 5,
+      combination
+    });
   });
 
   it("should return red if red wins", () => {
@@ -54,6 +59,11 @@ describe("testCombination selector", () => {
       [1, 1]
     ];
 
-    expect(testCombination(board, combination)).toBe("red");
+    expect(testCombination(board, combination)).toEqual({
+      color: "red",
+      column: 4,
+      row: 4,
+      combination
+    });
   });
 });

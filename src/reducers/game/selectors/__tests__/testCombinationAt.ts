@@ -1,5 +1,5 @@
 import { BoardState } from "../../board";
-import { testCombinationAt } from "../testCombination";
+import { testCombinationAt } from "../testCombinationAt";
 
 describe("testCombinationAt", () => {
   it("should return the color if the combination can be found", () => {

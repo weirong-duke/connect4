@@ -1,11 +1,11 @@
 import React from "react";
 import cn from "classnames";
 import { connect } from "react-redux";
-import { RootState } from "./reducers";
-import { getBoard, getCurrentPlayer, getWinner } from "./reducers/selectors";
+import { RootState } from "../reducers";
+import { getBoard, getCurrentPlayer, getWinner } from "../reducers/selectors";
 import { Row } from "./Row";
-import { dropCoin } from "./actions/dropCoin";
-import { Color } from "./types";
+import { dropCoin } from "../actions/dropCoin";
+import { Color } from "../types";
 
 interface Props {
   board: ReturnType<typeof getBoard>;
@@ -14,21 +14,21 @@ interface Props {
   dropCoin: typeof dropCoin;
 }
 
-interface State {}
-
-export class BoardComponent extends React.Component<Props, State> {
+export class BoardComponent extends React.Component<Props> {
   dropCoin = (column: number) => () => {
+    // we only allow a player to drop a coin if there is no winner yet
     if (!this.props.winner) {
       this.props.dropCoin(column, this.props.color);
     }
   };
 
-  displayWinner() {
+  displayHeader() {
+    // only display the winner if there is one
     if (this.props.winner) {
-      return <h2>Congratulations, {this.props.winner} wins the game!</h2>;
+      return <h2>Congratulations, {this.props.winner.color} wins the game!</h2>;
+    } else {
+      return <h2>It's {this.props.color}'s turn to play</h2>;
     }
-
-    return null;
   }
 
   displayRow = (colors: Color[], key: number) => {
@@ -42,7 +42,8 @@ export class BoardComponent extends React.Component<Props, State> {
 
     return (
       <>
-        {this.displayWinner()}
+        {this.displayHeader()}
+
         <div className="Game">
           <div className={classes}>{this.props.board.map(this.displayRow)}</div>
         </div>
