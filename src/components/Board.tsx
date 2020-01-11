@@ -33,7 +33,13 @@ export class BoardComponent extends React.Component<Props> {
 
   displayRow = (colors: Color[], key: number) => {
     return (
-      <Row dropCoin={this.dropCoin} colors={colors} key={`column-${key}`} />
+      <Row
+        row={key}
+        dropCoin={this.dropCoin}
+        colors={colors}
+        key={`column-${key}`}
+        winner={this.props.winner}
+      />
     );
   };
 

@@ -7,10 +7,7 @@ export function getWinner(state: LocalState) {
     const winner = testCombination(state.board, combination);
 
     if (winner) {
-      return {
-        color: state.board[winner.row][winner.column],
-        ...winner
-      };
+      return winner;
     }
   }
 
