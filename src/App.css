@@ -11,12 +11,13 @@
   background-color: #0077ee;
   border-radius: 10px;
   display: flex;
+  flex-direction: column;
   padding: 5px;
 }
 
-.Game-Column {
+.Game-Row {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .Game-Cell {
@@ -27,10 +28,17 @@
   margin: 5px;
 }
 
+.Game-Cell:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}
+
 .Game-Cell.red {
   background-color: red;
+  cursor: not-allowed;
 }
 
 .Game-Cell.yellow {
   background-color: yellow;
+  cursor: not-allowed;
 }
