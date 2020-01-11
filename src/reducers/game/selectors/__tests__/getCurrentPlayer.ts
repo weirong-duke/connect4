@@ -15,7 +15,7 @@ describe("getCurrentPlayer selector", () => {
     expect(getCurrentPlayer({ board })).toBe("yellow");
   });
 
-  it("is yellow on when equal number of coin", () => {
+  it("is yellow when equal number of coin", () => {
     const board: BoardState = [
       [null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null],
@@ -28,7 +28,7 @@ describe("getCurrentPlayer selector", () => {
     expect(getCurrentPlayer({ board })).toBe("yellow");
   });
 
-  it("is red on when more yellow are present", () => {
+  it("is red when more yellow are present", () => {
     const board: BoardState = [
       [null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null],
