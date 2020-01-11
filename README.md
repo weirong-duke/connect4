@@ -1,5 +1,17 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Connect Four
+
+The animation demonstrates Connect Four gameplay where the first player begins
+by dropping his/her yellow disc into the center column of the game board. The
+two players then alternate turns dropping one of their discs at a time into an
+unfilled column, until the second player, with red discs, achieves four discs
+in a row, diagonally, and wins. If the game board fills before either player
+achieves four in a row, then the game is a draw.
+
+![Connect Four
+](https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Connect_Four.gif/220px-Connect_Four.gif)
+
 ## Available Scripts
 
 In the project directory, you can run:
