@@ -44,20 +44,26 @@
   cursor: not-allowed;
 }
 
-.Game-Cell.glow {
-  animation-name: glow;
-  animation-duration: 1s;
+.Game-Cell.animated {
+  animation-name: animated;
+  animation-duration: 2s;
   animation-iteration-count: infinite;
+  animation-timing-function: linear;
+
+  transform-style: preserve-3d;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 40px;
+  color: black;
+}
+.Game-Cell.animated::after {
+  content: "×";
 }
 
-@keyframes glow {
-  from {
-    opacity: 0.7;
-  }
+@keyframes animated {
   50% {
-    opacity: 1;
-  }
-  to {
-    opacity: 0.7;
+    transform: rotateY(180deg);
   }
 }

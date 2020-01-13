@@ -13,9 +13,9 @@ interface Props {
 }
 
 export class Cell extends React.Component<Props> {
-  // We want the winning cells to glow to show
+  // We want the winning cells to be animated to show
   // the user the winning strike
-  shouldGlow() {
+  shouldAnimate() {
     const { winner, row, column, color } = this.props;
 
     // if there is no winner yet or this cell has not yet
@@ -39,7 +39,7 @@ export class Cell extends React.Component<Props> {
   render() {
     const { color, onClick } = this.props;
 
-    const classes = cn("Game-Cell", color, { glow: this.shouldGlow() });
+    const classes = cn("Game-Cell", color, { animated: this.shouldAnimate() });
 
     return <div onClick={onClick} className={classes}></div>;
   }
