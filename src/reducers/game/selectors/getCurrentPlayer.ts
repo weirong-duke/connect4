@@ -1,6 +1,9 @@
 import { LocalState } from "..";
 import { Color } from "../../../types";
 
+/**
+ * Return the current player (as a color) given a board game.
+ */
 export const getCurrentPlayer = (state: LocalState): Color => {
   let reds = 0;
   let yellows = 0;

@@ -2,6 +2,15 @@ import { Combination } from "../../../config";
 import { BoardState } from "../board";
 import { Color } from "../../../types";
 
+/**
+ * Test is a given combination is successfull
+ * at a given a column and row coordinate
+ *
+ * @param state the game board
+ * @param combination a winning combination configuration
+ * @param row a row coordinate on the board
+ * @param column a column coordinate on the board
+ */
 export function testCombinationAt(
   state: BoardState,
   combination: Combination,

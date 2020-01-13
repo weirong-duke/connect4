@@ -1,17 +1,11 @@
 import { Color } from "../../types";
 import { Action } from "../../actions/types";
 import { dropCoin } from "./dropCoin";
+import { getInitialBoard } from "./getInitialBoard";
 
 export type BoardState = Color[][];
 
-const initialState: BoardState = [
-  [null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null]
-];
+const initialState: BoardState = getInitialBoard();
 
 export const reducer = (
   state: BoardState = initialState,

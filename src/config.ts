@@ -37,6 +37,9 @@ const square = [
 
 export type Combination = number[][];
 
+export const boardWidth = 7;
+export const boardHeight = 6;
+
 export const winningCombinations: Combination[] = [
   horizontal,
   vertical,

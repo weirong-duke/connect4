@@ -10,6 +10,11 @@ export interface WinningCoordinates {
   color: Color;
 }
 
+/**
+ * Test if a combination is valid for a given board
+ * @param state the game board
+ * @param combination a winning combination configuration
+ */
 export function testCombination(
   state: BoardState,
   combination: Combination
