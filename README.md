@@ -12,6 +12,15 @@ achieves four in a row, then the game is a draw.
 ![Connect Four
 ](https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Connect_Four.gif/220px-Connect_Four.gif)
 
+## Build and deploy
+
+The connect four game can be played at https://debrice.github.io/connect4/index.html
+
+```sh
+yarn predeploy
+yarn deploy
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
