@@ -6,7 +6,7 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <h1>Connect four</h1>
-      <Board />
+  <Board />
     </div>
   );
 };

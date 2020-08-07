@@ -14,3 +14,4 @@ export function dropCoin(column: number, color: Color): DropCoinAction {
     payload: { column, color }
   };
 }
+

@@ -1,10 +1,11 @@
-import React from "react";
+import React, {FC, useEffect, useState} from "react";
 import cn from "classnames";
-import { connect } from "react-redux";
+import { connect, DispatchProp} from "react-redux";
 import { RootState } from "../reducers";
 import { getBoard, getCurrentPlayer, getWinner } from "../reducers/selectors";
 import { Row } from "./Row";
 import { dropCoin } from "../actions/dropCoin";
+import {resetBoard} from '../actions/reset'
 import { Color } from "../types";
 
 interface Props {
@@ -12,50 +13,84 @@ interface Props {
   color: ReturnType<typeof getCurrentPlayer>;
   winner: ReturnType<typeof getWinner>;
   dropCoin: typeof dropCoin;
+  resetBoard: typeof resetBoard;
 }
 
-export class BoardComponent extends React.Component<Props> {
-  dropCoin = (column: number) => () => {
+type BoardComponentProps = Props;
+const BoardComponent: FC<BoardComponentProps> = ({board, color, winner, dropCoin, resetBoard}) => {
+  const [redWins, setRedWins] = useState<number>(0);
+  const [yellowWins, setYellowWins] = useState<number>(0);
+  console.log('winnder', winner);
+
+  useEffect(() => {
+    if (winner) {
+      if (winner.color === 'yellow') {
+        setYellowWins(wins => wins +1);
+      } else if (winner.color === 'red') {
+        setRedWins(wins => wins + 1);
+      }
+    }
+  }, [winner])
+
+  const dropCoinComponent = (column: number) => () => {
     // we only allow a player to drop a coin if there is no winner yet
-    if (!this.props.winner) {
-      this.props.dropCoin(column, this.props.color);
+    if (!winner) {
+      dropCoin(column, color);
     }
   };
 
-  displayHeader() {
+  const displayHeader = () => {
     // only display the winner if there is one
-    if (this.props.winner) {
-      return <h2>Congratulations, {this.props.winner.color} wins the game!</h2>;
+    if (winner) {
+      return <h2>Congratulations, {winner.color} wins the game!</h2>;
     } else {
-      return <h2>It's {this.props.color}'s turn to play</h2>;
+      return <h2>It's {color}'s turn to play</h2>;
     }
   }
 
-  displayRow = (colors: Color[], key: number) => {
+  const displayRow =  (colors: Color[], key: number) => {
     return (
       <Row
         row={key}
-        dropCoin={this.dropCoin}
+        dropCoin={dropCoinComponent}
         colors={colors}
         key={`column-${key}`}
-        winner={this.props.winner}
+        winner={winner}
       />
     );
   };
 
-  render() {
-    const classes = cn("Game-Board");
+  const handleClickButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+    resetBoard();
+  };
 
-    return (
-      <>
-        {this.displayHeader()}
+  const classes = cn("Game-Board");
+  const buttonText = winner ? 'Play Again' : 'Start Over';
+  const buttonClass = winner ? 'winner' : '';
+  return (
+    <>
+      {displayHeader()}
 
-        <div className="Game">
-          <div className={classes}>{this.props.board.map(this.displayRow)}</div>
-        </div>
-      </>
-    );
-  }
+      <div className="Game">
+        <div className={classes}>{board.map(displayRow)}</div>
+      </div>
+      <button type="button" className={`Game-Board__button ${buttonClass}`} onClick={handleClickButton}>{buttonText}</button>
+      <div className={"Game-Board__table"}>
+        <table className="Game-Board__results">
+          <thead>
+          <tr><td>Red</td><td>Yellow</td></tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>{redWins} win{redWins === 1 ? '' : 's'}</td>
+            <td>{yellowWins} win{yellowWins === 1 ? '' : 's'}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </>
+  );
 }
 
 const mapState = (state: RootState) => ({
@@ -64,4 +99,4 @@ const mapState = (state: RootState) => ({
   winner: getWinner(state)
 });
 
-export const Board = connect(mapState, { dropCoin })(BoardComponent);
+export const Board = connect(mapState, { dropCoin, resetBoard })(BoardComponent);

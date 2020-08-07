@@ -16,6 +16,38 @@
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
 }
 
+.Game-Board__button {
+  background-color: red;
+  border: 1px solid black;
+  border-radius: 3px;
+  color: white;
+  margin: 10px;
+  padding: 4px;
+}
+
+.Game-Board__button.winner {
+  background-color: green;
+}
+
+.Game-board__table {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.Game-Board__results {
+  border-collapse: collapse;
+}
+.Game-Board__results td {
+  border: 1px solid black;
+  padding: 12px;
+}
+
+.Game-Board__results thead td {
+  font-weight: bold;
+}
+
 .Game-Row {
   display: flex;
   flex-direction: row;

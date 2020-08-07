@@ -1,5 +1,6 @@
 import { dropCoin } from "../dropCoin";
 import { BoardState } from "../board";
+import {resetBoardFunction} from "../resetBoard";
 
 describe("dropCoin function", () => {
   it("returns an unchanged state if column is full", () => {
@@ -60,6 +61,29 @@ describe("dropCoin function", () => {
       [null, null, "red", null, null, null, null],
       [null, null, "yellow", null, null, null, null],
       [null, null, "red", null, null, null, null]
+    ]);
+  });
+
+  it("resets the board on the correct dispatch", () => {
+    const state: BoardState = [
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null],
+      [null, null, "red", null, null, null, null],
+      [null, null, "yellow", null, null, null, null],
+      [null, null, "red", null, null, null, null]
+    ];
+
+    const newState = resetBoardFunction();
+
+    expect(newState).not.toBe(state);
+    expect(newState).toEqual([
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null]
     ]);
   });
 });
